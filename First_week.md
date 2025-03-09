@@ -23,3 +23,7 @@
 2. [ubuntu desktop 설치](https://ubuntu.com/download/desktop)
 3. [Rufus를 다운로드](https://rufus.ie/ko/#google_vignette)하여 부팅디스크 생성
 4. 완성된 usb 드라이브를 꽂고 노트북 부팅, BIOS화면의 Boot Priority order의 1순위를 usb드라이브로 변경 후 저장 및 종료
+
+이제 우분투를 사용할 준비가 완료 되었습니다.
+
+2주차 부터는 프로젝트 진행에 필요한 프로그램을 하나씩 설치하겠습니다.
