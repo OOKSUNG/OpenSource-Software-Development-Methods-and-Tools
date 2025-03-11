@@ -11,6 +11,11 @@
 
 ## [1주차 - 신성한 리눅스 설치 -](./First_week.md)
 ## 2주차 - -
+
+[sudo에 대한 정리](https://velog.io/@akfvh/sudoApt-vduqb7mk)
+
+[apt에 대한 정리](https://velog.io/@tmxkdyd11/Linux%EC%9D%98-apt-%EB%AA%85%EB%A0%B9%EC%96%B4-%EC%A0%95%EB%A6%AC-%EB%A6%AC%EB%88%85%EC%8A%A4-%ED%8C%A8%ED%82%A4%EC%A7%80%EC%99%80-%ED%8C%A8%ED%82%A4%EC%A7%80-%EB%A7%A4%EB%8B%88%EC%A0%80)
+
 curl 설치
 curl은 client url의 약자
 공유기의 공인 ip(외부 ip)를 확인하기 위해 설치
