@@ -17,10 +17,10 @@
 
 우선 Node.js와 npm을 설치합니다.
 
-'''
+```
 sudo apt update
 sudo apt install nodejs npm
-'''
+```
 
 [sudo에 대한 정리](https://velog.io/@akfvh/sudoApt-vduqb7mk)
 
