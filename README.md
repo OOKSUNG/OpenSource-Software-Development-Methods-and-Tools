@@ -10,7 +10,15 @@
 따라서 저는 이번 프로젝트의 목표를 리눅스를 통해 홈서버를 구축하고 웹페이지 혹은 게임을 호스팅하는 것으로 설정했습니다.
 
 ## [1주차 - 신성한 리눅스 설치 -](./First_week.md)
-## 2주차 - -
+## 2주차 - Node.js 설치 -
+
+2주차에는 간단한 웹서버를 만들어 같은 네트워크의 다른 컴퓨터에서 웹페이지에 접속해 볼 것 입니다.
+
+우선 Node.js와 npm을 설치합니다.
+'''
+sudo apt update
+sudo apt install nodejs npm
+'''
 
 [sudo에 대한 정리](https://velog.io/@akfvh/sudoApt-vduqb7mk)
 
@@ -20,3 +28,7 @@ curl 설치
 curl은 client url의 약자
 공유기의 공인 ip(외부 ip)를 확인하기 위해 설치
 sudo apt install curl로 설치
+
+
+
+다음주에는 외부 네트워크에서 웹페이지에 접속할 수 있도록 해보겠습니다.
