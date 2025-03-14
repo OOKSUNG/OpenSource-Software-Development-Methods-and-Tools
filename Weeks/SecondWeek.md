@@ -110,5 +110,8 @@ hostname -I
 
 ![Image](https://github.com/user-attachments/assets/d93b01f9-e97e-47e7-8fb1-b6773b047609)
 
+다른 윈도우 노트북으로 접속한 화면입니다.
 
+성공적으로 접속된 것을 확인할 수 있습니다.
 
+다음주에는 외부 네트워크에서 접속가능하도록 서버를 만들겠습니다.
