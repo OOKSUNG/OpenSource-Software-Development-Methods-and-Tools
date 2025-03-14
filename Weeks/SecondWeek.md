@@ -45,7 +45,7 @@ nano server.js
 
 nano는 CLI 에서 파일을 수정, 저장하게 해줍니다.
 
-server.js에 아래와 같은 코드를 작성합니다.
+server.js에 아래와 같은 코드를 작성하고 저장합니다.
 
 ```
 const http = require('http');
@@ -60,62 +60,20 @@ server.listen(PORT, '0.0.0.0', () => {
     console.log(`Server is running at http://0.0.0.0:${PORT}`);
 });
 ```
-위 코드를 설명하겠습니다.
+위 코드는 3000번 포트를 통해 다른 컴퓨터가 접속하도록 하며 접속시 'Hello, Node.js Server!\n'이라는 응답을 합니다.
 
-const http = require('http');
+다른 컴퓨터에서 서버에 접속하려면 3000번 포트를 열어줘야합니다.
 
-Node.js의 내장 http 모듈을 불러옵니다.
-
-웹 서버를 만들 때 http 모듈을 사용하면 **요청(req)과 응답(res)**을 처리할 수 있습니다.
-
-javascript
-복사
-편집
 ```
-const server = http.createServer((req, res) => {
-    res.writeHead(200, { 'Content-Type': 'text/plain' });
-    res.end('Hello, Node.js Server!\n');
-});
-http.createServer((req, res) => { ... })
+sudo ufw allow 3000/tcp
+sudo ufw reload
 ```
-요청(req)이 오면 실행되는 콜백 함수
+위 명령어를 실행해 3000번 포트의 방화벽을 비활성화 해줍니다.
 
-req: 클라이언트 요청 정보 (예: 브라우저에서 요청한 URL, 헤더 등)
-
-res: 서버에서 클라이언트로 보내는 응답 객체
 ```
-res.writeHead(200, { 'Content-Type': 'text/plain' });
+sudo ufw status
 ```
-응답의 HTTP 상태 코드(200 OK)와 **헤더(Content-Type: text/plain)`를 설정
-
-브라우저가 이 응답을 일반 텍스트로 인식하도록 함
-```
-res.end('Hello, Node.js Server!\n');
-```
-클라이언트에게 "Hello, Node.js Server!\n"라는 메시지를 보내고 응답 종료
-
-javascript
-복사
-편집
-```
-const PORT = 3000;
-server.listen(PORT, '0.0.0.0', () => {
-    console.log(`Server is running at http://0.0.0.0:${PORT}`);
-});
-server.listen(PORT, '0.0.0.0', callback)
-```
-
-서버가 3000번 포트에서 실행되도록 설정
-
-'0.0.0.0'은 모든 네트워크 인터페이스(로컬 및 외부)에서 접속 가능
-
-**만약 '127.0.0.1'**로 하면 localhost에서만 접속 가능
-
-서버 실행 후 실행될 콜백 함수
-
-터미널에 Server is running at http://0.0.0.0:3000 메시지 출력
-
-
+위 명령어로 방화벽이 비활성화 되었는지 확인합니다.
 
 
 
