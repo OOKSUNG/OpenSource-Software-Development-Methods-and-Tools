@@ -13,4 +13,4 @@
 ## [1주차 - 신성한 리눅스 설치 -](./Weeks/FirstWeek.md)
 ## [2주차 - Node.js 설치 -](./Weeks/SecondWeek.md)
 
-https://junhere.tistory.com/22
+
