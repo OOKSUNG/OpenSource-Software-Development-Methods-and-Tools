@@ -139,3 +139,4 @@ curl ifconfig.me
 
 아래 링크를 보고 의문을 해결했습니다.
 
+https://junhere.tistory.com/22
