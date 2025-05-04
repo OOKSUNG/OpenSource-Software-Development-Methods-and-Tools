@@ -1,0 +1,33 @@
+!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Page</title>
+</head>
+<body>
+    <h1>Welcome to the Main Page</h1>
+    <button id="clickButton">클릭!</button>
+    <h2>클릭 수: <span id="clickCount">0</span></h2>
+
+    <script>
+        // 클릭 버튼 클릭 이벤트
+        document.getElementById('clickButton').addEventListener('click', () => {
+            const username = prompt("이름을 입력하세요: ");
+            if (username) {
+                fetch('/update', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: `username=${username}`
+                }).then(response => response.json())
+                  .then(data => {
+                      // 클릭 수 업데이트
+                      document.getElementById('clickCount').textContent = data.clicks;
+                  });
+            }
+        });
+    </script>
+</body>
+</html>
