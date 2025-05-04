@@ -1,86 +1,33 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Button Click App</title>
+  <meta charset="UTF-8" />
+  <title>로그인</title>
 </head>
 <body>
-    <h1>Welcome to the Button Click App</h1>
+  <h2>이름을 입력하세요</h2>
+  <form id="loginForm">
+    <input type="text" name="username" placeholder="이름" required />
+    <button type="submit">Sign In</button>
+  </form>
 
-    <div id="login-section">
-        <h2>Sign In</h2>
-        <input type="text" id="username" placeholder="Enter your name">
-        <button onclick="login()">Login</button>
-        <p id="login-message"></p>
-    </div>
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const username = e.target.username.value;
+      const res = await fetch('/login', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ username })
+      });
 
-    <div id="click-section" style="display: none;">
-        <h2>Click the Button</h2>
-        <button onclick="clickButton()">Click Me!</button>
-        <p>Clicks: <span id="click-count">0</span></p>
-        <button onclick="showLeaderboard()">Show Leaderboard</button>
-    </div>
-
-    <div id="leaderboard-section" style="display: none;">
-        <h2>Leaderboard</h2>
-        <ul id="leaderboard"></ul>
-    </div>
-
-    <script>
-        let currentUser = null;
-
-        // 로그인 함수
-        async function login() {
-            const username = document.getElementById('username').value;
-            const response = await fetch('/login', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ username })
-            });
-
-            const result = await response.json();
-            if (response.ok) {
-                currentUser = username;
-                document.getElementById('login-message').textContent = '로그인 성공!';
-                document.getElementById('login-section').style.display = 'none';
-                document.getElementById('click-section').style.display = 'block';
-            } else {
-                document.getElementById('login-message').textContent = result.message;
-            }
-        }
-
-        // 버튼 클릭 함수
-        async function clickButton() {
-            if (!currentUser) return;
-
-            const response = await fetch('/click', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ username: currentUser })
-            });
-
-            const result = await response.json();
-            if (response.ok) {
-                document.getElementById('click-count').textContent = result.clicks;
-            }
-        }
-
-        // 리더보드 확인 함수
-        async function showLeaderboard() {
-            const response = await fetch('/leaderboard');
-            const leaderboard = await response.json();
-            const leaderboardElement = document.getElementById('leaderboard');
-
-            leaderboardElement.innerHTML = '';
-            leaderboard.forEach(user => {
-                const li = document.createElement('li');
-                li.textContent = `${user.username}: ${user.clicks} 클릭`;
-                leaderboardElement.appendChild(li);
-            });
-
-            document.getElementById('leaderboard-section').style.display = 'block';
-        }
-    </script>
+      if (res.ok) {
+        // 클릭 페이지로 이동
+        window.location.href = `/click.html?username=${encodeURIComponent(username)}`;
+      } else {
+        alert('로그인 실패');
+      }
+    });
+  </script>
 </body>
 </html>

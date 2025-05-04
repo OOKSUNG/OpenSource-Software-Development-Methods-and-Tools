@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>클릭!</title>
+</head>
+<body>
+  <h1>버튼을 눌러보세요 </h1>
+  <button id="clickBtn">Click!</button>
+  <p id="result"></p>
+
+  <script>
+    const params = new URLSearchParams(location.search);
+    const username = params.get('username');
+
+    document.getElementById('clickBtn').addEventListener('click', async () => {
+      const res = await fetch('/click', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ username })
+      });
+
+      const data = await res.json();
+      document.getElementById('result').textContent = `${username}님의 총 클릭 수: ${data.clicks}`;
+    });
+  </script>
+</body>
+</html>
