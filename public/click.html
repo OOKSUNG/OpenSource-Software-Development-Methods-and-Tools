@@ -5,6 +5,7 @@
   <title>클릭!</title>
   <script src="/socket.io/socket.io.js"></script>
   <script src="/js/particles.js"></script> <!-- particles.js 경로 추가 -->
+  <script src="/js/howler.min.js"></script> <!-- Howler.js 파일 불러오기 -->
   <style>
     html, body {
       margin: 0;
@@ -79,6 +80,7 @@
     const leaderboardBody = document.getElementById('leaderboardBody');
     const socket = io();
 
+    // 버튼 클릭 시 실행되는 이벤트
     document.getElementById('clickBtn').addEventListener('click', async () => {
       const res = await fetch('/click', {
         method: 'POST',
@@ -88,8 +90,15 @@
 
       const data = await res.json();
       resultEl.textContent = `${username}님의 총 클릭 수: ${data.clicks}`;
+
+      // 버튼 클릭 시 소리 재생 (Howler.js 사용)
+      const clickSound = new Howl({
+        src: ['/sounds/Blopsound.mp3']  // 클릭 소리 파일 경로 (public/sounds 폴더에 넣을 것)
+      });
+      clickSound.play();
     });
 
+    // 실시간 리더보드 수신
     socket.on('updateLeaderboard', (users) => {
       leaderboardBody.innerHTML = '';
       users
