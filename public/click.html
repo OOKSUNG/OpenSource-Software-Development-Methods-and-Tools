@@ -4,32 +4,72 @@
   <meta charset="UTF-8" />
   <title>클릭!</title>
   <script src="/socket.io/socket.io.js"></script>
+  <script src="/js/particles.js"></script> <!-- particles.js 경로 추가 -->
   <style>
-    body { font-family: sans-serif; padding: 20px; }
-    #leaderboard { margin-top: 20px; }
-    table { border-collapse: collapse; width: 300px; }
-    th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
-    th { background-color: #f0f0f0; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: sans-serif;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #particles-js {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    .content {
+      position: relative;
+      z-index: 1;
+      padding: 20px;
+    }
+
+    #leaderboard {
+      margin-top: 20px;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 300px;
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #f0f0f0;
+    }
   </style>
 </head>
 <body>
-  <h1>버튼을 눌러보세요</h1>
-  <button id="clickBtn">Click!</button>
-  <p id="result"></p>
+  <div id="particles-js"></div> <!-- 입자 배경 요소 -->
 
-  <h2>리더보드</h2>
-  <div id="leaderboard">
-    <table>
-      <thead>
-        <tr>
-          <th>이름</th>
-          <th>클릭 수</th>
-        </tr>
-      </thead>
-      <tbody id="leaderboardBody">
-        <!-- 실시간 데이터 -->
-      </tbody>
-    </table>
+  <div class="content">
+    <h1>버튼을 눌러보세요</h1>
+    <button id="clickBtn">Click!</button>
+    <p id="result"></p>
+
+    <h2>리더보드</h2>
+    <div id="leaderboard">
+      <table>
+        <thead>
+          <tr>
+            <th>이름</th>
+            <th>클릭 수</th>
+          </tr>
+        </thead>
+        <tbody id="leaderboardBody">
+          <!-- 실시간 데이터 -->
+        </tbody>
+      </table>
+    </div>
   </div>
 
   <script>
@@ -37,10 +77,8 @@
     const username = params.get('username');
     const resultEl = document.getElementById('result');
     const leaderboardBody = document.getElementById('leaderboardBody');
+    const socket = io();
 
-    const socket = io(); // socket.io 클라이언트 연결
-
-    // 버튼 클릭 처리
     document.getElementById('clickBtn').addEventListener('click', async () => {
       const res = await fetch('/click', {
         method: 'POST',
@@ -52,7 +90,6 @@
       resultEl.textContent = `${username}님의 총 클릭 수: ${data.clicks}`;
     });
 
-    // 실시간 리더보드 수신
     socket.on('updateLeaderboard', (users) => {
       leaderboardBody.innerHTML = '';
       users
@@ -63,8 +100,33 @@
         });
     });
 
-    // 접속 시 서버에 사용자 정보 알리기
     socket.emit('join', { username });
+
+    // particles.js 설정
+    particlesJS('particles-js', {
+      particles: {
+        number: { value: 80 },
+        size: { value: 3 },
+        color: { value: '#ffffff' },
+        line_linked: {
+          enable: true,
+          distance: 150,
+          color: '#ffffff',
+          opacity: 0.4,
+          width: 1
+        },
+        move: {
+          enable: true,
+          speed: 2
+        }
+      },
+      interactivity: {
+        detect_on: 'canvas',
+        events: {
+          onhover: { enable: true, mode: 'repulse' }
+        }
+      }
+    });
   </script>
 </body>
 </html>
