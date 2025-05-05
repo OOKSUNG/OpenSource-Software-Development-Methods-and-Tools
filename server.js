@@ -63,6 +63,6 @@ io.on('connection', (socket) => {
 });
 
 // 서버 시작
-server.listen(PORT, () => {
-  console.log(`서버 실행 중: http://localhost:${PORT}`);
+server.listen(PORT, '0.0.0.0', () => {
+  console.log(`서버 실행 중: http://<공인 IP>:${PORT}`);
 });
