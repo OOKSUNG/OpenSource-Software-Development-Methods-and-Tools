@@ -11,3 +11,4 @@
 따라서 저는 이번 프로젝트의 목표를 리눅스를 통해 홈서버를 구축하고 웹페이지 혹은 게임을 호스팅하는 것으로 설정했습니다.
 
 
+https://ooksung.github.io/OpenSource-Software-Development-Methods-and-Tools/
